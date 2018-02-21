@@ -4,6 +4,6 @@
  </head>
  <body>
  <?php echo "<p>Olá <b>Renan Cesar Sanfelice!</b></n></p>"; ?>
- <?php echo "<p>Foi alterado local<</p>"; ?>
+ <?php echo "<p><b>Emporium Digital</b></n></p>"; ?>
  </body>
 </html>
