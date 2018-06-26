@@ -41,10 +41,22 @@ echo $aluno;
 
 //Aula 66
 // update de um registro
+/*
 $usuario = new Usuario();
 
 $usuario->buscaId(6);
 $usuario->update("cobranca","rcs1357");
+
+echo $usuario;
+*/
+
+//Aula 67
+// update de um registro
+
+$usuario = new Usuario();
+
+$usuario->buscaId(4);
+$usuario->delete();
 
 echo $usuario;
 
