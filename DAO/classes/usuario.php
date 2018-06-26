@@ -57,5 +57,40 @@ class Usuario {
             "data_cadastro"=>$this->getDataCadastro()->format("d/m/Y")
         ));
     }
+
+    public static function lista() {
+
+        $sql = new Sql();
+        return $sql->select("select * from tb_usuarios order by login");
+    }
+
+    public static function busca($login) {
+
+        $sql = new Sql();
+        return $sql->select("select * from tb_usuarios where login like :LOGIN order by login", array(
+            ':LOGIN'=>"%".$login."%"
+        ));
+
+    }
+
+    public function login($login, $senha) {
+
+        $sql = new sql();
+
+        $retorno = $sql->select("select * from tb_usuarios where login = :LOGIN and senha = :SENHA", array(
+            ":LOGIN" => $login,
+            ":SENHA"=>$senha
+        ));
+        if (count($retorno) > 0) {
+
+            $row = $retorno[0];
+            $this->setId($row['id']);
+            $this->setLogin($row['login']);
+            $this->setSenha($row['senha']);
+            $this->setDataCadastro(new DateTime($row['data_cadastro']));
+        }else
+            throw new Exception("Login e/ou senha inválidos");
+
+    }
 }
 
