@@ -22,6 +22,31 @@ require_once("config.php");
 //echo json_encode($busca);
 
 // faz login com usuario e senha
+//$usuario = new Usuario();
+//$usuario->login("renan","123456");
+//echo $usuario;
+
+/*aula 65
+// insert usuario novo
+
+$aluno = new Usuario("aluno", "@lun0");
+
+// ante do metodo construtor __construct
+//$aluno->setLogin("juridico");
+//$aluno->setSenha("a1b2c3d4");
+
+$aluno->novo();
+echo $aluno;
+*/
+
+//Aula 66
+// update de um registro
 $usuario = new Usuario();
-$usuario->login("renan","123456");
+
+$usuario->buscaId(6);
+$usuario->update("cobranca","rcs1357");
+
 echo $usuario;
+
+
+

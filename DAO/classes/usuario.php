@@ -48,6 +48,11 @@ class Usuario {
         $this->setDataCadastro(new DateTime($row['data_cadastro']));
         }
     }
+    public function __construct($login = "", $senha = ""){
+
+        $this->setLogin($login);
+        $this->setSenha($senha);
+    }
     public function __toString() {
 
         return json_encode(array(
@@ -90,6 +95,40 @@ class Usuario {
             $this->setDataCadastro(new DateTime($row['data_cadastro']));
         }else
             throw new Exception("Login e/ou senha inválidos");
+
+    }
+
+    public function novo() {
+
+        $sql = new Sql();
+
+        $resultado = $sql->select("CALL sp_usuarios_insert(:LOGIN,:SENHA)", array(
+            ":LOGIN"=> $this->getLogin(),
+            ":SENHA"=> $this->getSenha()
+        ));
+
+        if (count($resultado) > 0) {
+            $row = $resultado[0];
+            $this->setId($row['id']);
+            $this->setLogin($row['login']);
+            $this->setSenha($row['senha']);
+            $this->setDataCadastro(new DateTime($row['data_cadastro']));
+        }else
+            throw new Exception("Registro não foi salvo!");
+        }
+
+    public function update($login, $senha){
+
+        $this->setLogin($login);
+        $this->setSenha($senha);
+
+        $sql = new Sql();
+
+        $sql->sqlQuery("update tb_usuarios set login = :LOGIN, senha = :SENHA where id = :ID", array(
+            ":LOGIN"=> $this->getLogin(),
+            ":SENHA"=> $this->getSenha(),
+            ":ID"=> $this->getId()
+        ));
 
     }
 }
